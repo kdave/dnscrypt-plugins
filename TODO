@@ -1,0 +1,7 @@
+* logger
+  * enhance output
+  * make it reusable for blkacklist
+
+* blacklist
+  * do refused-do-not-query-resolver right
+  * rich wildcard?
