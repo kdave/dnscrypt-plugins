@@ -9,6 +9,9 @@ A set of plugins that extend functionality of [DNSCrypt proxy](https://dnscrypt.
 
 Dependencies: dnscrypt-proxy headers and enabled plugin support, LDNS.
 
+More plugins:
+* https://github.com/jedisct1/dnscrypt-plugin-geoip-block -- Block DNS queries according to the country they resolve to
+
 ### logger
 Parameter: path to log file
 
