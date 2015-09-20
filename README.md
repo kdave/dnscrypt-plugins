@@ -6,6 +6,7 @@ A set of plugins that extend functionality of [DNSCrypt proxy](https://dnscrypt.
 * logger - log queries to a file
 * blacklist - filter outgoing queries by a pattern or IP address
 * validate - validate names according to [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.txt), section 2.3.1
+* empty\_aaaa - (copied from DNSCrypt) directly return empty answer to AAAA queries
 
 Dependencies: dnscrypt-proxy headers and enabled plugin support, LDNS.
 
@@ -56,6 +57,14 @@ No parameters, no output.
 
 Refuse to resolve disallowed names by returning `NXDOMAIN`. May be used to
 prevent resolving `user@host.typo` . See [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.txt), section 2.3.1.
+
+### empty\_aaaa
+No parameters, no output.
+
+Usage:
+```shell
+$ dnscrypt-proxy --plugin=libdcplugin_empty_aaaa.so
+```
 
 Build
 -----

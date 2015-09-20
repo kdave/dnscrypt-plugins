@@ -1,7 +1,8 @@
 pkglib_LTLIBRARIES = 		\
 	libdcplugin_logger.la	\
         libdcplugin_validate.la	\
-        libdcplugin_blacklist.la
+        libdcplugin_blacklist.la	\
+        libdcplugin_empty_aaaa.la
 
 libdcplugin_logger_la_LIBTOOLFLAGS = --tag=disable-static
 libdcplugin_logger_la_SOURCES = logger.c common.c
@@ -37,6 +38,19 @@ libdcplugin_blacklist_la_LDFLAGS = \
         -module \
         -no-undefined
 libdcplugin_blacklist_la_CPPFLAGS = \
+        $(LTDLINCL) \
+        -I../../include
+
+libdcplugin_empty_aaaa_la_LIBTOOLFLAGS = --tag=disable-static
+libdcplugin_empty_aaaa_la_SOURCES = empty-aaaa.c
+libdcplugin_empty_aaaa_la_LIBADD = @LDNS_LIBS@
+libdcplugin_empty_aaaa_la_LDFLAGS = \
+        $(AM_LDFLAGS) \
+        -avoid-version \
+        -export-dynamic \
+        -module \
+        -no-undefined
+libdcplugin_empty_aaaa_la_CPPFLAGS = \
         $(LTDLINCL) \
         -I../../include
 
