@@ -90,7 +90,7 @@ static int validate(const unsigned char *str, const size_t size, int first)
 	return 1;
 }
 
-DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin *dcplugin,
+static DCPluginSyncFilterResult validate_sync_pre(DCPlugin *dcplugin,
 		DCPluginDNSPacket *dcp_packet)
 {
 #ifdef DEBUG_OUTPUT
@@ -153,6 +153,12 @@ DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin *dcplugin,
 #endif
 
 	return DCP_SYNC_FILTER_RESULT_OK;
+}
+
+DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin *dcplugin,
+		DCPluginDNSPacket *dcp_packet)
+{
+	return validate_sync_pre(dcplugin, dcp_packet);
 }
 
 DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin *dcplugin,
