@@ -32,8 +32,8 @@ dcplugin_init(DCPlugin * const dcplugin, int argc, char *argv[])
     return 0;
 }
 
-DCPluginSyncFilterResult
-dcplugin_sync_pre_filter(DCPlugin *dcplugin, DCPluginDNSPacket *dcp_packet)
+static DCPluginSyncFilterResult
+empty_aaa_sync_pre(DCPlugin *dcplugin, DCPluginDNSPacket *dcp_packet)
 {
     ldns_pkt                 *packet;
     ldns_rr_list             *questions;
@@ -56,4 +56,10 @@ dcplugin_sync_pre_filter(DCPlugin *dcplugin, DCPluginDNSPacket *dcp_packet)
     ldns_pkt_free(packet);
 
     return result;
+}
+
+DCPluginSyncFilterResult
+dcplugin_sync_pre_filter(DCPlugin *dcplugin, DCPluginDNSPacket *dcp_packet)
+{
+	return empty_aaa_sync_pre(dcplugin, dcp_packet);
 }
