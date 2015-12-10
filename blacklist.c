@@ -30,6 +30,10 @@
 
 #include "common.h"
 
+#ifndef MERGED
+DCPLUGIN_MAIN(__FILE__);
+#endif
+
 /* 2 LDNS_RCODE_SERVFAIL */
 /* 3 LDNS_RCODE_NXDOMAIN */
 /* 5 LDNS_RCODE_REFUSED */
@@ -40,8 +44,6 @@ const char *blacklist_str[] = {
 	[LDNS_RCODE_SERVFAIL] "SERVFAIL",
 	[LDNS_RCODE_NXDOMAIN] "NXDOMAIN"
 };
-
-DCPLUGIN_MAIN(__FILE__);
 
 typedef struct StrList_ {
 	struct StrList_ *next;
@@ -188,6 +190,8 @@ static void log_message(Blocking *blocking, const char *fmt, ...)
 	fflush(blocking->logfile);
 }
 
+#ifndef MERGED
+
 const char* dcplugin_description(DCPlugin *const dcplugin)
 {
 	return "Block specific domains and IP addresses";
@@ -298,6 +302,8 @@ int dcplugin_destroy(DCPlugin *const dcplugin)
 	return 0;
 }
 
+#endif	/* MERGED */
+
 static DCPluginSyncFilterResult apply_block_domains(DCPluginDNSPacket *dcp_packet,
 		Blocking *const blocking, ldns_pkt *const packet)
 {
@@ -396,8 +402,12 @@ static DCPluginSyncFilterResult blacklist_sync_post(DCPlugin *dcplugin,
 	return DCP_SYNC_FILTER_RESULT_OK;
 }
 
+#ifndef MERGED
+
 DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin *dcplugin,
 		DCPluginDNSPacket *dcp_packet)
 {
 	return blacklist_sync_post(dcplugin, dcp_packet);
 }
+
+#endif	/* MERGED */

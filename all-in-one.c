@@ -7,6 +7,11 @@
 #include <dnscrypt/plugin.h>
 #include "common.h"
 
+#include "blacklist.c"
+#include "empty-aaaa.c"
+#include "logger.c"
+#include "validate.c"
+
 DCPLUGIN_MAIN(__FILE__);
 
 const char *dcplugin_description(DCPlugin *const dcplugin)

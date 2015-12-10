@@ -19,6 +19,8 @@
 
 #include "common.h"
 
+#ifndef MERGED
+
 DCPLUGIN_MAIN(__FILE__);
 
 #define PLUGIN_VERSION 8
@@ -73,6 +75,8 @@ int dcplugin_destroy(DCPlugin * const dcplugin)
 
 	return 0;
 }
+
+#endif	/* MERGED */
 
 static int string_fprint(FILE * const fp, const unsigned char *str,
 		const size_t size)
@@ -199,6 +203,8 @@ static DCPluginSyncFilterResult logger_sync_pre(DCPlugin * dcplugin,
 	return DCP_SYNC_FILTER_RESULT_OK;
 }
 
+#ifndef MERGED
+
 DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin * dcplugin,
 		DCPluginDNSPacket * dcp_packet)
 {
@@ -210,3 +216,5 @@ DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin * dcplugin,
 {
 	return DCP_SYNC_FILTER_RESULT_OK;
 }
+
+#endif	/* MERGED */

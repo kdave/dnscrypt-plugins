@@ -16,15 +16,17 @@
 
 #include "common.h"
 
-DCPLUGIN_MAIN(__FILE__);
-
 #undef DEBUG_OUTPUT
-
-#define PLUGIN_VERSION 1
 
 #ifndef putc_unlocked
 # define putc_unlocked(c, stream) putc((c), (stream))
 #endif
+
+#ifndef MERGED
+
+DCPLUGIN_MAIN(__FILE__);
+
+#define PLUGIN_VERSION 1
 
 const char *dcplugin_description(DCPlugin *const dcplugin)
 {
@@ -72,6 +74,8 @@ int dcplugin_destroy(DCPlugin *const dcplugin)
 
 	return 0;
 }
+
+#endif	/* MERGED */
 
 static int validate(const unsigned char *str, const size_t size, int first)
 {
@@ -155,6 +159,8 @@ static DCPluginSyncFilterResult validate_sync_pre(DCPlugin *dcplugin,
 	return DCP_SYNC_FILTER_RESULT_OK;
 }
 
+#ifndef MERGED
+
 DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin *dcplugin,
 		DCPluginDNSPacket *dcp_packet)
 {
@@ -166,3 +172,5 @@ DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin *dcplugin,
 {
 	return DCP_SYNC_FILTER_RESULT_OK;
 }
+
+#endif	/* MERGED */

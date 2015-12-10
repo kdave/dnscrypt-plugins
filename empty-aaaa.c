@@ -14,6 +14,8 @@
 #include <dnscrypt/plugin.h>
 #include <ldns/ldns.h>
 
+#ifndef MERGED
+
 DCPLUGIN_MAIN(__FILE__);
 
 const char *
@@ -31,6 +33,8 @@ dcplugin_init(DCPlugin * const dcplugin, int argc, char *argv[])
 
     return 0;
 }
+
+#endif	/* MERGED */
 
 static DCPluginSyncFilterResult
 empty_aaa_sync_pre(DCPlugin *dcplugin, DCPluginDNSPacket *dcp_packet)
@@ -58,8 +62,12 @@ empty_aaa_sync_pre(DCPlugin *dcplugin, DCPluginDNSPacket *dcp_packet)
     return result;
 }
 
+#ifndef MERGED
+
 DCPluginSyncFilterResult
 dcplugin_sync_pre_filter(DCPlugin *dcplugin, DCPluginDNSPacket *dcp_packet)
 {
 	return empty_aaa_sync_pre(dcplugin, dcp_packet);
 }
+
+#endif
