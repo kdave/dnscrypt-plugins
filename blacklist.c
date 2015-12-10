@@ -364,7 +364,7 @@ static DCPluginSyncFilterResult apply_block_ips(DCPluginDNSPacket *dcp_packet,
 	return DCP_SYNC_FILTER_RESULT_OK;
 }
 
-DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin *dcplugin,
+static DCPluginSyncFilterResult blacklist_sync_post(DCPlugin *dcplugin,
 		DCPluginDNSPacket *dcp_packet)
 {
 	Blocking                 *blocking = dcplugin_get_user_data(dcplugin);
@@ -394,4 +394,10 @@ DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin *dcplugin,
 	ldns_pkt_free(packet);
 
 	return DCP_SYNC_FILTER_RESULT_OK;
+}
+
+DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin *dcplugin,
+		DCPluginDNSPacket *dcp_packet)
+{
+	return blacklist_sync_post(dcplugin, dcp_packet);
 }
