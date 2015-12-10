@@ -93,7 +93,7 @@ static int string_fprint(FILE * const fp, const unsigned char *str,
 	return 0;
 }
 
-DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin * dcplugin,
+static DCPluginSyncFilterResult logger_sync_pre(DCPlugin * dcplugin,
 		DCPluginDNSPacket * dcp_packet)
 {
 	FILE *fp = dcplugin_get_user_data(dcplugin);
@@ -197,6 +197,12 @@ DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin * dcplugin,
 	fflush(fp);
 
 	return DCP_SYNC_FILTER_RESULT_OK;
+}
+
+DCPluginSyncFilterResult dcplugin_sync_pre_filter(DCPlugin * dcplugin,
+		DCPluginDNSPacket * dcp_packet)
+{
+	return logger_sync_pre(dcplugin, dcp_packet);
 }
 
 DCPluginSyncFilterResult dcplugin_sync_post_filter(DCPlugin * dcplugin,
